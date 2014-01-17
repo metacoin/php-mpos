@@ -68,8 +68,8 @@ class User extends Base {
     $field = array('name' => 'no_fees', 'type' => 'i', 'value' => !$this->isNoFee($id));
     return $this->updateSingle($id, $field);
   }
-  public function changeLocked($id) {
-    $field = array('name' => 'is_locked', 'type' => 'i', 'value' => !$this->isLocked($id));
+  public function setLocked($id, $value) {
+    $field = array('name' => 'is_locked', 'type' => 'i', 'value' => $value);
     return $this->updateSingle($id, $field);
   }
   public function changeAdmin($id) {
@@ -169,7 +169,7 @@ class User extends Base {
       $this->incUserFailed($id);
       // Check if this account should be locked
       if (isset($this->config['maxfailed']['login']) && $this->getUserFailed($id) >= $this->config['maxfailed']['login']) {
-        $this->changeLocked($id);
+        $this->setLocked($id, 1);
         if ($token = $this->token->createToken('account_unlock', $id)) {
           $aData['token'] = $token;
           $aData['username'] = $username;
@@ -201,7 +201,7 @@ class User extends Base {
     $this->incUserPinFailed($userId);
     // Check if this account should be locked
     if (isset($this->config['maxfailed']['pin']) && $this->getUserPinFailed($userId) >= $this->config['maxfailed']['pin']) {
-      $this->changeLocked($userId);
+      $this->setLocked($userId, 1);
       if ($token = $this->token->createToken('account_unlock', $userId)) {
         $username = $this->getUserName($userId);
         $aData['token'] = $token;
