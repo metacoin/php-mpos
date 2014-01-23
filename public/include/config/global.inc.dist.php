@@ -620,4 +620,33 @@ $config['smarty']['cache_lifetime'] = 30;
  *   max    =  10.0
  **/
 $config['system']['load']['max'] = 10.0;
+
+/**
+ * smtp setting
+ *
+ * This will use smtp socket instead of the default php mail() function.
+ * Useful if you have another smtp application like dovecot on the server.
+ *
+ * Default:
+ *   auth       =  1 
+ *   server     =  'servername'
+ *   port       =  25 
+ *   user       =  ''
+ *   pass       =  ''
+ *   localhost  =  'servername'
+ *   timeout    =  30
+ *   newline    =  "\r\n"
+ *   idfrom     =  ''
+ **/
+ 
+$config['smtp']['auth'] = 1;
+$config['smtp']['server'] = 'pool.florincoin.info';
+$config['smtp']['port'] = 25;
+$config['smtp']['user'] = 'support@pool.florincoin.info';
+$config['smtp']['pass'] = '';
+$config['smtp']['localhost'] = 'pool.florincoin.info';
+$config['smtp']['timeout'] = 30;
+$config['smtp']['newline'] = "\r\n";
+$config['smtp']['idfrom'] = 'pool.florincoin.info';
+
 ?>
